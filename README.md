@@ -86,3 +86,9 @@ com.innovatech.ms_tickets/
 - MySQL Driver
 - Lombok
 - Spring Boot DevTools
+
+## Integración con BFF
+- Ruta base consumida: /api/v1/tickets
+- Filtros esperados: estado=ABIERTO, prioridad=CRITICA
+- Healthcheck: /actuator/health
+
