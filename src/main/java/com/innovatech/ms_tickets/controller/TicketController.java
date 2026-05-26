@@ -12,9 +12,11 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.Positive;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -23,6 +25,7 @@ import java.util.List;
 @RequestMapping("/api/v1/tickets")
 @RequiredArgsConstructor
 @Tag(name = "Tickets", description = "API para la gestion de tickets de soporte")
+@Validated
 public class TicketController {
 
     private final TicketService ticketService;
@@ -74,7 +77,7 @@ public class TicketController {
     @GetMapping("/{id}")
     public ResponseEntity<TicketResponseDTO> obtenerTicketPorId(
             @Parameter(description = "ID del ticket", required = true)
-            @PathVariable Long id) {
+            @PathVariable @Positive(message = "El id debe ser mayor a cero") Long id) {
         TicketResponseDTO response = ticketService.obtenerTicketPorId(id);
         return ResponseEntity.ok(response);
     }
@@ -93,7 +96,7 @@ public class TicketController {
     @GetMapping("/usuario/{usuarioId}")
     public ResponseEntity<List<TicketResponseDTO>> listarHistorialPorUsuario(
             @Parameter(description = "ID del usuario", required = true)
-            @PathVariable Long usuarioId) {
+            @PathVariable @Positive(message = "El usuarioId debe ser mayor a cero") Long usuarioId) {
         List<TicketResponseDTO> response = ticketService.listarHistorialPorUsuario(usuarioId);
         return ResponseEntity.ok(response);
     }
@@ -139,7 +142,7 @@ public class TicketController {
     @PutMapping("/{id}")
     public ResponseEntity<TicketResponseDTO> actualizarTicket(
             @Parameter(description = "ID del ticket", required = true)
-            @PathVariable Long id,
+            @PathVariable @Positive(message = "El id debe ser mayor a cero") Long id,
             @Valid @RequestBody TicketUpdateRequestDTO requestDTO) {
         TicketResponseDTO response = ticketService.actualizarEstadoYPrioridad(id, requestDTO);
         return ResponseEntity.ok(response);
