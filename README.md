@@ -1,5 +1,15 @@
 # innovatech-ms-tickets
 
+## Estado de evidencia
+
+| Categoria | Estado |
+|---|---|
+| Implementado | CRUD de tickets, productor RabbitMQ, Actuator |
+| Configurado | MySQL/H2, RabbitMQ, perfiles, Docker |
+| Validado | compilacion |
+| Pendiente de validacion runtime | publicacion real del evento y stack completo |
+| No evidenciado | consumidor oficial de `Ticket_Creado` |
+
 ## 1. Descripcion general
 `innovatech-ms-tickets` es el microservicio responsable de registrar y consultar tickets de soporte dentro del ecosistema InnovaTech. Expone operaciones REST para crear tickets, consultar por identificador, listar tickets por usuario y actualizar su estado o prioridad.
 
